@@ -1,0 +1,93 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block metadescription %}
+ {% if category %}
+  { {{category.description|truncatewords:155}} 
+  {% else %} Welcome to ABCstore world. 
+  {% endif %}
+   {% endblock %} 
+   {% block title %} 
+   {% if category %}
+{{category.name }} 
+{% else %} See our new collections 
+{% endif %} 
+{% endblock %}
+{% block content %} 
+{% if category %}
+<div>
+  <div class="row my-row">
+    <div class="mx_auto">
+      <p>
+        <a href="{% url 'shop:allProductCat' %}">Our Products Collections</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endif %}
+<br />
+{% if category %}
+<div class="mx_auto">
+  <img
+    style="height:500px;object-fit: cover;"
+    class="w-100 d-flex my_image"
+    src="{{category.image.url}}"
+    alt="{{category.name}}"
+  
+  />
+</div>
+<br />
+<div>
+  <h1 class="text-center my_title">{{category.name}}</h1>
+  <p class="text-justify d-flex">{{category.description}}</p>
+</div>
+{% else %}
+<div>
+  <img
+  class="w-100 p-md-2 d-flex"
+    src="{% static 'img/banner.png' %}"
+    alt=""
+  />
+</div>
+
+<div class="py-md-3">
+  <h1 class="text-center">Our Products Collections</h1>
+  <p class="text-justify d-flex">
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis magnam atque
+    illo itaque facilis necessitatibus incidunt, aperiam corporis sit quo.
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis magnam atque
+    illo itaque facilis necessitatibus incidunt, aperiam corporis sit quo.
+  </p>
+</div>
+{% endif %}
+<div class="container">
+  <div class="row mx-auto">
+    {% for product in products %}
+    <div class="col-md-4 my-1 col-sm-12 col-lg-3 ">
+      <div class="card mx-auto">
+        <a href="{{product.get_url}}"
+            ><img
+              class="card-img-top  d-flex"
+              src="{{product.image.url}}"
+              alt="{{product.name}}" 
+          /></a>
+        <div class="card-body">
+          <div class="">
+            <h4 class="my_title">{{product.name}}</h4>
+            <p>${{product.price}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<div class="mx-auto">
+  {% if products.paginator.num_pages > 1 %}
+  {% endif %}<hr>
+  <div class="text-center">
+    {% for pg in products.paginator.page_range %}
+    <a href="?page={{pg}}" class="btn btn-light -btn-sm {% if products.number == pg %} active {% endif %}">{{pg}}</a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
