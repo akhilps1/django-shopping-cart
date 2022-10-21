@@ -75,27 +75,28 @@ Cart
 
         </table>
     </div>
-    <div class="col-12 col-lg-6 text-center">
+    <div class="col-12 col-lg-6 text-start">
         <table class="table my_custom_table ">
             <thead class="my_custom_thead">
             <tr>
                 <th>Checkout</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody >
             <tr>
                 <td>Please review your shopping cart items before proceeding with tha order payment.</td>
             </tr>
             <tr>
-                <td class="d-flex justify-content-end me-5 pe-4">
+                <td class="d-flex justify-content-end md-me-5 pe-4">
                      <strong>Total Amount : {{total}}</strong>
                 </td>
             </tr>
             </tbody>
         </table>
-        <div class="mx-auto">
-            <a href="{% url 'shop:allProductCat' %}" class="btn btn-secondary my_custom_button">Continue
+        <div class="mx-auto d-flex justify-content-end md-me-3">
+            <a href="{% url 'shop:allProductCat' %}" class="btn btn-success m-1">Continue
                 Shopping</a>
+            <a href="{% url 'shop:allProductCat' %}" class="btn btn-success my_custom_button m-1">Pay Now</a>
         </div>
     </div>
 
